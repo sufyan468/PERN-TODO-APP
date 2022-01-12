@@ -7,13 +7,13 @@ const ListTodos = () => {
 
   //delete todo function
 
-  const deleteTodo = async id => {
+  const deleteTodo = async (id) => {
     try {
-      const deleteTodo = await fetch(`http://localhost:5000/todos/${id}`, {
-        method: "DELETE"
+      const deleteTodo = await fetch(`http://localhost:3001/todos/${id}`, {
+        method: "DELETE",
       });
 
-      setTodos(todos.filter(todo => todo.todo_id !== id));
+      setTodos(todos.filter((todo) => todo.todo_id !== id));
     } catch (err) {
       console.error(err.message);
     }
@@ -21,7 +21,7 @@ const ListTodos = () => {
 
   const getTodos = async () => {
     try {
-      const response = await fetch("http://localhost:5000/todos");
+      const response = await fetch("http://localhost:3001/todos");
       const jsonData = await response.json();
 
       setTodos(jsonData);
@@ -38,8 +38,7 @@ const ListTodos = () => {
 
   return (
     <Fragment>
-      {" "}
-      <table class="table mt-5 text-center">
+      <table class="table mt-5 text-left">
         <thead>
           <tr>
             <th>Description</th>
@@ -48,12 +47,7 @@ const ListTodos = () => {
           </tr>
         </thead>
         <tbody>
-          {/*<tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
-          </tr> */}
-          {todos.map(todo => (
+          {todos.map((todo) => (
             <tr key={todo.todo_id}>
               <td>{todo.description}</td>
               <td>
